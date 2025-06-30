@@ -1,0 +1,106 @@
+:host ::ng-deep .p-datatable {
+
+  .p-datatable-table-container {
+
+    .p-datatable-table {
+      border: none;
+      border-spacing: 0 .8rem;
+      padding: 0 1rem;
+
+      thead>tr {
+        :first-child {
+          border-radius: var(--p-border-radius-lg) 0px 0px 8px;
+        }
+
+        :last-child {
+          border-radius: 0px var(--p-border-radius-lg) var(--p-border-radius-lg) 0px;
+        }
+      }
+
+      .app-table-row {
+        filter: drop-shadow(0px 6px 5px rgba(0, 0, 0, 0.2));
+        >:first-child {
+          border-radius: var(--p-border-radius-lg) 0px 0px var(--p-border-radius-lg);
+        }
+
+        >:last-child {
+          border-radius: 0px var(--p-border-radius-lg) var(--p-border-radius-lg) 0px;
+        }
+
+        td {
+          border: none;
+        }
+
+        .p-button {
+          width: 1.5rem;
+          height: 1.5rem;
+          background: var(--p-gray-200);
+          border: none;
+
+          &.p-button-no-background {
+            background: none;
+          }
+
+          >span {
+            font-size: 0.75rem;
+          }
+
+          &:hover {
+            background: var(--p-gray-400);
+          }
+
+          .p-button-icon {
+            color: var(--p-gray-700);
+          }
+        }
+      }
+
+      tr.app-no-row-hover {
+        background-color: var(--p-primary-200);
+
+        &.secondary {
+          background-color: var(--p-primary-100);
+
+          &:hover {
+            background-color: var(--p-primary-100);
+            color: var(--p-primary-900);
+            font-weight: bold;
+          }
+
+          >td {
+            border-radius: 0px;
+            border: none;
+          }
+
+          >:first-child {
+            border-radius: var(--p-border-radius-lg) 0px 0px var(--p-border-radius-lg);
+          }
+
+          >:last-child {
+            border-radius: 0px var(--p-border-radius-lg) var(--p-border-radius-lg) 0px;
+          }
+        }
+
+        &:hover {
+          background-color: var(--p-primary-200);
+          color: var(--p-datatable-row-color);
+        }
+
+        >td {
+          border-radius: var(--p-border-radius-lg);
+        }
+      }
+
+      .app-skeleton-row {
+        position: relative;
+        width: 100%;
+        height: 2rem;
+      }
+    }
+  }
+
+  .p-paginator {
+    margin-top: 1rem;
+    border-radius: var(--p-border-radius-lg);
+  }
+}

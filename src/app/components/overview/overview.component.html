@@ -1,0 +1,146 @@
+<p-table 
+  [value]="students" 
+  [tableStyle]="{ 'min-width': '60rem' }" 
+  [paginator]="true" 
+  [rows]="20"
+  [loading]="loading()"
+  [paginator]="true"
+  loadingIcon="pi pi-spin pi-spinner"
+  [rowHover]="true"
+  [size]="'large'"
+  [stripedRows]="true"
+  dataKey="id"
+  [scrollable]="true"
+  [scrollHeight]="'80vh'"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 1%"></th>
+      <th pSortableColumn="id"># STUDENT ID <p-sortIcon field="id"/></th>
+      <th pSortableColumn="firstName">NAME <p-sortIcon field="firstName"/></th>
+      <th pSortableColumn="lastName">SURNAME <p-sortIcon field="lastName"/></th>
+      <th pSortableColumn="email">EMAIL <p-sortIcon field="email"/></th>
+      <th pSortableColumn="gender">ACTIVE <p-sortIcon field="gender"/></th>
+      <th pSortableColumn="dateOfBirth">DATE OF BIRTH <p-sortIcon field="dateOfBirth"/></th>
+      <th pSortableColumn="grade">GRADE <p-sortIcon field="grade"/></th>
+      <th pSortableColumn="major">MAJOR <p-sortIcon field="major"/></th>
+      <th pSortableColumn="enrollmentDate">ENROLLMENT DATE <p-sortIcon field="enrollmentDate"/></th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="sorticon" let-sortOrder>
+    <ng-container *ngIf="sortOrder === 0">
+      <i class="pi pi-sort" style="font-size: 0.75rem"></i>
+    </ng-container>
+    <ng-container *ngIf="sortOrder === 1">
+      <i class="pi pi-sort-up" style="font-size: 0.75rem"></i>
+    </ng-container>
+    <ng-container *ngIf="sortOrder === -1">
+      <i class="pi pi-sort-down" style="font-size: 0.75rem"></i>
+    </ng-container>
+  </ng-template>
+  <ng-template pTemplate="body"  let-student let-expanded="expanded">
+      <tr class="app-table-row">
+        <td>
+          <p-button type="button" pRipple [pRowToggler]="student" styleClass="p-button-no-background" [text]="true" [rounded]="true" [plain]="true" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+        </td>
+        <td>{{ student.id }}</td>
+        <td>{{ student.firstName }}</td>
+        <td>{{ student.lastName }}</td>
+        <td>{{ student.email }}</td>
+        <td>
+          <p-tag [value]="student.isActive ? 'YES' : 'NO'" [severity]="getActiveStatus(student.isActive)" />
+        </td>
+        <td>{{ student.dateOfBirth | date:'mediumDate' }}</td>
+        <td>{{ student.grade }}</td>
+        <td>{{ student.major }}</td>
+        <td>{{ student.enrollmentDate | date:'mediumDate' }}</td>
+        <td>
+          <p-button (click)="openMenu($event, student, actions)" type="button" icon="pi pi-ellipsis-v" />
+        </td>
+      </tr>
+  </ng-template>
+  <ng-template #emptymessage>
+    <tr>
+      <td colspan="6">This university has no students.</td>
+    </tr>
+  </ng-template>
+  <ng-template #expandedrow let-student>
+    <tr class="app-no-row-hover">
+      <td colspan="12">
+        <div class="p-4">
+          <h3>Courses for {{ student.firstName }}</h3>
+          <p-table [value]="student.courses" dataKey="id" [rowHover]="false">
+            <ng-template #header>
+              <tr>
+                <th pSortableColumn="id" style="width: 10%;">Id <p-sortIcon field="id" /></th>
+                <th pSortableColumn="name" style="width: 40%;">Name <p-sortIcon field="name" /></th>
+                <th pSortableColumn="grade" style="width: 30%;">Grade <p-sortIcon field="grade" /></th>
+                <th pSortableColumn="completed" style="width: 30%;">Status <p-sortIcon field="completed" /></th>
+              </tr>
+            </ng-template>
+            <ng-template #body let-course>
+              <tr class="app-no-row-hover secondary">
+                <td>{{ course.id }}</td>
+                <td>{{ course.name }}</td>
+                <td [pEditableColumn]="course.grade" pEditableColumnField="grade">
+                <p-cellEditor>
+                    <ng-template #input>
+                        <input
+                            pInputText
+                            type="number"
+                            min="0"
+                            max="100"
+                            required="true"
+                            [(ngModel)]="course.grade" />
+                    </ng-template>
+                    <ng-template #output>
+                        {{ course.grade }}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+                <td>
+                  <p-tag [value]="course.grade > 59 ? 'COMPLETED' : 'FAILED'" [severity]="getActiveStatus(course.grade > 59)" />
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="sorticon" let-sortOrder>
+              <ng-container *ngIf="sortOrder === 0">
+                <i class="pi pi-sort" style="font-size: 0.75rem"></i>
+              </ng-container>
+              <ng-container *ngIf="sortOrder === 1">
+                <i class="pi pi-sort-up" style="font-size: 0.75rem"></i>
+              </ng-container>
+              <ng-container *ngIf="sortOrder === -1">
+                <i class="pi pi-sort-down" style="font-size: 0.75rem"></i>
+              </ng-container>
+            </ng-template>
+            <ng-template #emptymessage>
+              <tr>
+                <td colspan="6">This student has not applied yet to any course.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template #loadingbody let-columns="columns">
+    <tr *ngFor="let _ of [].constructor(20); let i = index" style="height:46px" class="app-skeleton-row">
+      <td><p-skeleton/></td>
+      <td><p-skeleton/></td>
+      <td><p-skeleton/></td>
+      <td><p-skeleton/></td>
+      <td><p-skeleton/></td>
+      <td><p-skeleton/></td>
+      <td><p-skeleton/></td>
+      <td><p-skeleton/></td>
+      <td><p-skeleton/></td>
+      <td><p-skeleton/></td>
+      <td><p-skeleton/></td>
+    </tr>
+  </ng-template>
+  <p-menu #actions [model]="actionsList" [popup]="true"  appendTo="body" />
+  <p-confirmdialog />
+</p-table>
+

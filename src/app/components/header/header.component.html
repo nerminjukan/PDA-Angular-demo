@@ -1,0 +1,27 @@
+<header class="app-header">
+  <div class="app-header-start">
+    <div class="app-menu-container">
+      <p-menu #menu [model]="items" [popup]="true" />
+      <p-button (click)="menu.toggle($event)" icon="pi pi-align-left" [dt]="customMenu"/>
+    </div>
+    <div class="app-user-container">
+      <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" class="mr-2" size="large" shape="circle" />
+      <div class="app-user-data">
+        <div class="app-user-name">Nermin Jukan</div>
+        <div><p-tag value="SUPER ADMIN" /></div>
+      </div>
+    </div>
+  </div>
+  <div class="app-header-end">
+    <div class="app-selectables-container">
+      <div class="app-dropdown-dummy">
+        <span>Timezone</span>
+        <p-select [options]="timezones" [(ngModel)]="selectedTimezone" placeholder="Select a Timezone" />
+      </div>
+      <div class="app-dropdown-dummy">
+        <span>University</span>
+        <p-select [options]="universities" [(ngModel)]="selectedUniversity" placeholder="Select a Timezone" />
+      </div>
+    </div>
+  </div>
+</header>

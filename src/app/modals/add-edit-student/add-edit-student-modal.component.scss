@@ -1,0 +1,73 @@
+:host ::ng-deep .app-student-modal {
+  .modal-description {
+    display: block;
+    margin-bottom: 2rem;
+  }
+
+  .input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    height: 2.5rem;
+    gap: var(--p-confirmdialog-content-gap);
+
+    >label, >span {
+      font-weight: bold;
+    }
+
+    >input {
+      width: 15rem;
+      font-size: var(--p-inputtext-sm-font-size);
+      padding-block: var(--p-inputtext-sm-padding-y);
+      padding-inline: var(--p-inputtext-sm-padding-x);
+      background: none;
+      border: 1px solid var(--p-select-border-color);
+      border-radius: var(--p-select-border-radius);
+      transition: border-color var(--p-inputtext-transition-duration);
+
+      &:enabled:hover {
+        border-color: var(--p-inputtext-hover-border-color);
+        cursor: pointer;
+      }
+
+      &:disabled {
+        background-color: var(--p-inputtext-disabled-background);
+      }
+
+      &.ng-invalid.ng-touched {
+        border: 1px solid var(--p-red-700);
+      }
+    }
+
+    .is-active-container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 16px;
+      width: 15rem;
+
+      .radio-container {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+    }
+
+    .p-multiselect, .p-select, .p-datepicker {
+      width: 15rem;
+
+      &.ng-invalid.ng-touched {
+        border: 1px solid var(--p-red-700);
+      }
+    }
+
+  }
+}
+
+.footer-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--p-dialog-footer-gap);
+}

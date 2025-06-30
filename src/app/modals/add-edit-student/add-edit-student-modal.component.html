@@ -1,0 +1,64 @@
+<form [formGroup]="studentForm!" class="app-student-modal">
+  <div class="app-student-modal">
+    <span class="modal-description">Update student information.</span>
+
+    <div class="input-container">
+      <label for="name">Name</label>
+      <input pInputText id="name" formControlName="firstName" autocomplete="off" />
+    </div>
+
+    <div class="input-container">
+      <label for="surname">Surname</label>
+      <input pInputText id="surname" formControlName="lastName" autocomplete="off" />
+    </div>
+
+    <div class="input-container">
+      <label for="email">Email</label>
+      <input pInputText id="email" formControlName="email" autocomplete="off" />
+    </div>
+
+    <div class="input-container">
+      <label>Currently active?</label>
+      <div class="is-active-container">
+        <div class="radio-container">
+          <p-radiobutton name="isActive" [value]="true" formControlName="isActive" inputId="yes" />
+          <label for="yes">YES</label>
+        </div>
+
+        <div class="radio-container">
+          <p-radiobutton name="isActive" [value]="false" formControlName="isActive" inputId="no" />
+          <label for="no">NO</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <label for="dateOfBirth">Date of birth</label>
+      <p-datepicker formControlName="dateOfBirth" appendTo="body" [size]="'small'" dateFormat="M d, yy" />
+    </div>
+
+    <div class="input-container">
+      <label for="grade">Grade</label>
+      <input pInputNumber id="grade" formControlName="grade" autocomplete="off" />
+    </div>
+
+    <div class="input-container">
+      <label for="enrollmentDate">Enrollment date</label>
+      <p-datepicker formControlName="enrollmentDate" appendTo="body" [size]="'small'" dateFormat="M d, yy" />
+    </div>
+
+    <div class="input-container">
+      <label for="major">Major</label>
+      <p-select [options]="collegeMajors" appendTo="body" formControlName="major" placeholder="Select a Major" />
+    </div>
+    
+    <div class="input-container">
+      <label for="courses">Courses</label>
+      <p-multiselect [options]="collegeCourses" appendTo="body" [formControl]="coursesControl" optionLabel="name" placeholder="Select Courses" [maxSelectedLabels]="0" [selectionLimit]="3" />
+    </div>
+  </div>
+</form>
+<div class="footer-container">
+  <p-button label="Cancel" severity="secondary" (click)="closeDialog()" />
+  <p-button [disabled]="!studentForm?.valid" label="Save" (click)="save()" />
+</div> 
