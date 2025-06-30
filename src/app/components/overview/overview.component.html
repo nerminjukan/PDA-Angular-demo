@@ -127,17 +127,7 @@
   </ng-template>
   <ng-template #loadingbody let-columns="columns">
     <tr *ngFor="let _ of [].constructor(20); let i = index" style="height:46px" class="app-skeleton-row">
-      <td><p-skeleton/></td>
-      <td><p-skeleton/></td>
-      <td><p-skeleton/></td>
-      <td><p-skeleton/></td>
-      <td><p-skeleton/></td>
-      <td><p-skeleton/></td>
-      <td><p-skeleton/></td>
-      <td><p-skeleton/></td>
-      <td><p-skeleton/></td>
-      <td><p-skeleton/></td>
-      <td><p-skeleton/></td>
+      <td *ngFor="let _ of [].constructor(11); let j = index"><p-skeleton/></td>
     </tr>
   </ng-template>
   <p-menu #actions [model]="actionsList" [popup]="true"  appendTo="body" />
