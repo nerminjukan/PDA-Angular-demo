@@ -2,7 +2,7 @@
 
 ## Setup
 
-1. Clone the repository:
+1. clone the repository
 
 2. cd into project root directory
 
